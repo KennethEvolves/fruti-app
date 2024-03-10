@@ -1,10 +1,14 @@
 package com.example.frutiapp;
 
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -48,5 +52,36 @@ public class MainActivity extends AppCompatActivity {
             id = getResources().getIdentifier("uva", "drawable", getPackageName());
             iv_personaje.setImageResource(id);
         }
+
+        mp = MediaPlayer.create(this, R.raw.alphabet_song);
+        mp.start();
+        mp.setLooping(true);
+
+    }
+
+    public void Jugar(View view){
+        String nombre = et_nombre.getText().toString();
+
+        if(!nombre.equals("")){
+            mp.stop();
+            mp.release();
+
+            Intent intent = new Intent(this, MainActivity_Nivel1.class);
+
+            intent.putExtra("jugador", nombre);
+            startActivity(intent);
+            finish();
+        } else {
+            Toast.makeText(this, "Primero debes escribir tu nombre", Toast.LENGTH_SHORT).show();
+
+            et_nombre.requestFocus();
+            InputMethodManager imm = (InputMethodManager) getSystemService(this.INPUT_METHOD_SERVICE);
+            imm.showSoftInput(et_nombre, InputMethodManager.SHOW_IMPLICIT);
+        }
+    }
+
+    @Override
+    public void onBackPressed(){
+
     }
 }
