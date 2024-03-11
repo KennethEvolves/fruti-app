@@ -96,8 +96,8 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-//    @Override
-//    public void onBackPressed() {
-//        super.onBackPressed();
-//    }
+      @Override
+      public void onBackPressed() {
+          super.onBackPressed();
+      }
 }
