@@ -13,6 +13,9 @@
         android:theme="@style/Theme.Frutiapp"
         tools:targetApi="31">
         <activity
+            android:name=".MainActivity_Nivel2"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity_Nivel1"
             android:exported="false" />
         <activity
