@@ -18,7 +18,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-public class MainActivity_Nivel2 extends AppCompatActivity {
+public class MainActivity_Nivel3 extends AppCompatActivity {
 
     private TextView tv_nombre, tv_score;
     private ImageView iv_Auno, iv_Ados, iv_vidas;
@@ -34,9 +34,9 @@ public class MainActivity_Nivel2 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_main_nivel1);
+        setContentView(R.layout.activity_main_nivel3);
 
-        Toast.makeText(this, "Nivel 2 - Sumas moderadas", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Nivel 3 - Restas", Toast.LENGTH_SHORT).show();
 
         tv_nombre = (TextView)findViewById(R.id.textView_nombre);
         tv_score = (TextView)findViewById(R.id.textView_score);
@@ -119,24 +119,26 @@ public class MainActivity_Nivel2 extends AppCompatActivity {
     }
 
     public void NumAleatorio(){
-        if (score <= 14) {
+        if (score <= 19) {
             numAleatorio_uno = (int) (Math.random() * 10);
             numAleatorio_dos = (int) (Math.random() * 10);
 
-            resultado = numAleatorio_uno + numAleatorio_dos;
-
-
-            for (int i = 0; i < numero.length; i++){
-                int id = getResources().getIdentifier(numero[i], "drawable", getPackageName());
-                if (numAleatorio_uno == i){
-                    iv_Auno.setImageResource(id);
-                }if(numAleatorio_dos == i) {
-                    iv_Ados.setImageResource(id);
+            resultado = numAleatorio_uno - numAleatorio_dos;
+            if (resultado >= 0) {
+                for (int i = 0; i < numero.length; i++){
+                    int id = getResources().getIdentifier(numero[i], "drawable", getPackageName());
+                    if (numAleatorio_uno == i){
+                        iv_Auno.setImageResource(id);
+                    }if(numAleatorio_dos == i) {
+                        iv_Ados.setImageResource(id);
+                    }
                 }
+            } else {
+                NumAleatorio();
             }
 
         } else {
-            Intent intent = new Intent(this, MainActivity_Nivel3.class);
+            Intent intent = new Intent(this, MainActivity_Nivel4.class);
 
             string_score = String.valueOf(score);
             string_vidas = String.valueOf(vidas);
