@@ -1,8 +1,12 @@
 package com.example.frutiapp;
 
+import android.content.ContentValues;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -54,6 +58,51 @@ public class MainActivity_Nivel1 extends AppCompatActivity {
         NumAleatorio();
     }
 
+    public void Comparar (View view) {
+        String respuesta = et_respuesta.getText().toString();
+
+        if(!respuesta.isEmpty()) {
+            int respuesta_jugador = Integer.parseInt(respuesta);
+            if (resultado == respuesta_jugador) {
+                mp_great.start();
+                score++;
+                tv_score.setText("Score: " + score);
+                et_respuesta.setText("");
+                BaseDeDatos();
+            } else {
+                mp_bad.start();
+                vidas--;
+                BaseDeDatos();
+
+                switch (vidas) {
+                    case 3:
+                        iv_vidas.setImageResource(R.drawable.tresvidas);
+                        break;
+                    case 2:
+                        Toast.makeText(this, "Te quedan dos manzanas", Toast.LENGTH_LONG).show();
+                        iv_vidas.setImageResource(R.drawable.dosvidas);
+                        break;
+                    case 1:
+                        Toast.makeText(this, "Te queda una manzana", Toast.LENGTH_LONG).show();
+                        iv_vidas.setImageResource(R.drawable.unavida);
+                        break;
+                    case 0:
+                        Toast.makeText(this, "Haz perdido todas tus manzanas", Toast.LENGTH_LONG).show();
+                        Intent intent = new Intent(this, MainActivity.class);
+                        startActivity(intent);
+                        finish();
+                        mp.stop();
+                        mp.release();
+                        break;
+                }
+                et_respuesta.setText("");
+            }
+            NumAleatorio();
+        } else {
+            Toast.makeText(this, "Escribe tu respuesta", Toast.LENGTH_SHORT).show();
+        }
+    }
+
     public void NumAleatorio(){
         if (score <= 9) {
 
@@ -91,5 +140,36 @@ public class MainActivity_Nivel1 extends AppCompatActivity {
             mp.stop();
             mp.release();
         }
+    }
+
+    public void BaseDeDatos() {
+        AdminSQLiteOpenHelper admin =  new AdminSQLiteOpenHelper(this, "BD", null, 1);
+        SQLiteDatabase BD = admin.getWritableDatabase();
+        Cursor consulta = BD.rawQuery("select * from puntaje where score = (select max(score) from puntaje)", null);
+
+        if (consulta.moveToFirst()) {
+            String temp_nombre = consulta.getString(0);
+            String temp_score = consulta.getString(1);
+
+            int bestScore = Integer.parseInt(temp_score);
+
+            if (score > bestScore) {
+                ContentValues modificacion = new ContentValues();
+                modificacion.put("nombre", nombre_jugador);
+                modificacion.put("score", score);
+                BD.update("puntaje", modificacion, "score = " + bestScore, null);
+            }
+            BD.close();
+        } else {
+            ContentValues insertar = new ContentValues();
+            insertar.put("nombre", nombre_jugador);
+            insertar.put("score", score);
+            BD.insert("puntaje", null, insertar);
+            BD.close();
+        }
+    }
+
+    @Override
+    public void onBackPressed () {
     }
 }
