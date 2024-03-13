@@ -20,7 +20,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class MainActivity_Nivel3 extends AppCompatActivity {
 
-    private TextView tv_nombre, tv_score;
+    public TextView tv_nombre, tv_score;
     private ImageView iv_Auno, iv_Ados, iv_vidas;
     private EditText et_respuesta;
     private MediaPlayer mp, mp_great, mp_bad;
@@ -49,7 +49,7 @@ public class MainActivity_Nivel3 extends AppCompatActivity {
         tv_nombre.setText("Jugador: " + nombre_jugador);
 
         string_score = getIntent().getStringExtra("score");
-        score = Integer.parseInt(string_score);
+        score = Integer.parseInt(stri  ng_score);
         tv_score.setText("Score: " + score);
 
         string_vidas = getIntent().getStringExtra("vidas");
@@ -119,7 +119,7 @@ public class MainActivity_Nivel3 extends AppCompatActivity {
     }
 
     public void NumAleatorio(){
-        if (score <= 19) {
+        if (score <= 14) {
             numAleatorio_uno = (int) (Math.random() * 10);
             numAleatorio_dos = (int) (Math.random() * 10);
 

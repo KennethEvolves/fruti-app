@@ -20,7 +20,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class MainActivity extends AppCompatActivity {
 
-    private EditText et_nombre;
+    public EditText et_nombre;
     private ImageView iv_personaje;
     private TextView tv_bestScore;
     private MediaPlayer mp;

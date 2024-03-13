@@ -20,7 +20,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class MainActivity_Nivel2 extends AppCompatActivity {
 
-    private TextView tv_nombre, tv_score;
+    public TextView tv_nombre, tv_score;
     private ImageView iv_Auno, iv_Ados, iv_vidas;
     private EditText et_respuesta;
     private MediaPlayer mp, mp_great, mp_bad;
@@ -119,7 +119,7 @@ public class MainActivity_Nivel2 extends AppCompatActivity {
     }
 
     public void NumAleatorio(){
-        if (score <= 14) {
+        if (score <= 9) {
             numAleatorio_uno = (int) (Math.random() * 10);
             numAleatorio_dos = (int) (Math.random() * 10);
 
