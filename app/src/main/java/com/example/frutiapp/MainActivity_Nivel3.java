@@ -49,7 +49,7 @@ public class MainActivity_Nivel3 extends AppCompatActivity {
         tv_nombre.setText("Jugador: " + nombre_jugador);
 
         string_score = getIntent().getStringExtra("score");
-        score = Integer.parseInt(stri  ng_score);
+        score = Integer.parseInt(string_score);
         tv_score.setText("Score: " + score);
 
         string_vidas = getIntent().getStringExtra("vidas");

@@ -5,7 +5,8 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/wallpaperprincipal"
+    android:background="@color/design_default_color_background"
+    android:foreground="@drawable/wallpaperprincipal"
     tools:context=".MainActivity_Nivel4">
 
     <TextView
